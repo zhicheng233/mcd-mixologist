@@ -113,6 +113,7 @@ Token 逐条踩过并做了对应处理。以下**全部是实测结论**，不�
 | **部分接口没有 `## Original Response` 标记**（如 `query-store-coupons`），而说明层的 markdown 表格里含有 `{data[].title}` 这种花括号 | 不能找第一个 `{`，必须认 `{"success"` 这个锚点从后往前切 |
 | **金额单位是「分」，不是元** | `calculate-price` 返回 `price: 4850` 即 ¥48.50，展示前必须 ÷100 |
 | `query-meals` 的 `data.meals` 是**以 productCode 为键的对象**，不是数组 | 用 `meals.items()` 遍历，不能 `for m in meals` |
+| `query-meals` 默认只返回**当前时段**在售的餐品，早餐时段外拿不到麦满分 | 传 `reservationDate: "yyyy-MM-dd 08:00"` 就能取到早餐菜单（实测 95 个 SKU） |
 | `list-nutrition-foods` 的 `data` 是**字符串**，内容是 `[160]{cols}:` 开头的类 CSV 表格 | 按行切、按逗号 split，自行重建表头 |
 | `query-nearby-stores` 在 `searchType=2` 时**必须同时传 city 和 keyword**，只传 city 会返回 `600058 城市名或者关键词不能为空` | 先带默认 keyword（如商圈名）再让用户改 |
 | **券专属商品不在 `query-meals` 列表里**：不带 couponId 核价会返回全 0 且 `productList: []` | 全 0 一律视为「不可售」，绝不能当成免费 |
@@ -132,6 +133,10 @@ query-store-coupons  → 3 张可用券
 calculate-price  龙焰鸡腿堡两件套 + 该券
   → originalPrice 3400 / discount 1352 / price 2048 分
   → ¥34.00 → ¥20.48，券真实生效
+
+query-meals  storeCode=1450713, reservationDate="2026-10-24 08:00"
+  → 95 个 SKU，全是早餐菜单（麦满分 / 脆薯饼 / 油条 / 豆浆）
+  → 同一个门店不带 reservationDate 时只有 122 个正餐 SKU，麦满分一个都没有
 ```
 
 > 若官方后续更新返回格式，以官方文档为准，本项目需同步调整。
@@ -177,7 +182,7 @@ calculate-price  龙焰鸡腿堡两件套 + 该券
 ## 6. 边界与已知限制
 
 - **不保证全网最低价**。本项目做的是"当下状态下的合适搭配"，不是比价器。
-- **不覆盖全部餐品**。本地风味库目前 31 个常见餐品，未收录的餐品不会进配方；
+- **不覆盖全部餐品**。本地风味库目前 33 个常见餐品，未收录的餐品不会进配方；
   门店在售但风味库没有的餐品，会被跳过（宁可少给，不给错）。
 - **早餐品只在早餐时段出现**，这是硬规则，避免晚上推荐麦满分。
 - **热量与价格是离线快照**，正式展示前必须经 `calculate-price` /
@@ -221,6 +226,10 @@ calculate-price  龙焰鸡腿堡两件套 + 该券
    风味库里的餐品映射到 `calculate-price` 需要的 `productCode`。
 4. **修掉三个解析 bug**：金额单位（分/元）、`data.meals` 是对象不是数组、
    券接口没有 `## Original Response` 标记导致被 markdown 表格里的花括号带偏。
+5. **补全早餐菜单**。用 `reservationDate` 取到早餐时段才有的 SKU，
+   把 `吉士蛋麦满分`（官方营养表里查不到）换成有官方数据的 `大脆鸡扒麦满分`，
+   并补上 `脆薯饼`、`脆香油条`、`优品豆浆` 的真实价格与热量。
+   早餐菜单和正餐菜单是**两套**，`query-meals` 不带 `reservationDate` 时拿不到麦满分。
 
 ### 当日真实活动（`campaign-calendar` 返回）
 

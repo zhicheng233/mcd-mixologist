@@ -50,7 +50,7 @@
         "巨无霸汉堡"
       ],
       "note": "吧台的老基酒，谁点都不会错，但也没人会为它惊喜。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "1100"
     },
@@ -83,7 +83,7 @@
         "McSpicy"
       ],
       "note": "辣度直接顶到太阳穴，专治说不出口的那种烦。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "1440",
       "menu_name": "麦辣鸡腿汉堡"
@@ -116,7 +116,7 @@
         "板烧鸡腿汉堡"
       ],
       "note": "不声不响的那杯，喝的时候不觉得，回头总想再要一杯。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "1406"
     },
@@ -149,7 +149,7 @@
         "Filet-O-Fish"
       ],
       "note": "清淡派的退路，温柔，但撑不住太饿的夜。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "1600"
     },
@@ -182,7 +182,7 @@
         "双层吉士"
       ],
       "note": "两片芝士压下去，胃里那个洞就暂时听不见了。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "1120"
     },
@@ -211,8 +211,8 @@
         "dairy",
         "gluten"
       ],
-      "note": "小杯装，垫一下，别让胃空着过夜。",
-      "period": "all",
+      "note": "小杯装，垫一下，别让胃空着。",
+      "period": "main",
       "price_verified": false,
       "menu_name": "吉士汉堡包"
     },
@@ -242,7 +242,7 @@
         "gluten"
       ],
       "note": "双份基酒，度数最高的一杯，喝完基本就睡了。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "511781",
       "menu_name": "培根安格斯厚牛堡"
@@ -274,7 +274,7 @@
         "gluten"
       ],
       "note": "浓的底子上浮了一层菜，喝起来没那么有负担。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "1106"
     },
@@ -291,7 +291,7 @@
         "warm": 0.95
       },
       "kcal": 308,
-      "price": 16.0,
+      "price": 14.0,
       "tags": [
         "猪肉",
         "早餐",
@@ -304,37 +304,36 @@
       ],
       "note": "早晨那一杯，热气一上来，人就醒了。",
       "period": "breakfast",
-      "price_verified": false
+      "price_verified": true,
+      "sku": "5024"
     },
     {
-      "id": "egg-mcmuffin",
-      "name": "吉士蛋麦满分",
+      "id": "crispy-chicken-mcmuffin",
+      "name": "大脆鸡扒麦满分",
       "role": "base",
       "flavor": {
-        "sweet": 0.25,
-        "heat": 0.0,
-        "umami": 0.7,
-        "fresh": 0.35,
+        "sweet": 0.2,
+        "heat": 0.15,
+        "umami": 0.75,
+        "fresh": 0.2,
         "rich": 0.7,
         "warm": 0.95
       },
-      "kcal": 387,
-      "price": 14.0,
+      "kcal": 361,
+      "price": 11.0,
       "tags": [
-        "蛋",
+        "鸡肉",
         "早餐",
-        "汉堡",
-        "相对轻"
+        "汉堡"
       ],
       "contains": [
-        "egg",
-        "dairy",
+        "chicken",
         "gluten"
       ],
-      "note": "清淡的早晨配方，不抢戏，但很稳。",
+      "note": "鸡扒煎得脆，咬下去有声音，早上的第一口就该这样。",
       "period": "breakfast",
-      "price_verified": false,
-      "menu_name": "猪柳蛋麦满分"
+      "price_verified": true,
+      "sku": "5889"
     },
     {
       "id": "mcnuggets",
@@ -360,7 +359,7 @@
         "gluten"
       ],
       "note": "万能辅料，配什么都行，缺点是容易不知不觉吃完。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "1401",
       "menu_name": "麦乐鸡"
@@ -389,7 +388,7 @@
         "gluten"
       ],
       "note": "加辣不加量，情绪需要一个出口的时候加这个。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "1700",
       "menu_name": "麦辣鸡翅"
@@ -418,7 +417,7 @@
         "gluten"
       ],
       "note": "一整块压下去，分量感很足，适合当第二基酒。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "521156",
       "menu_name": "那么大鸡排（椒盐风味）"
@@ -446,7 +445,7 @@
         "fried"
       ],
       "note": "最标准的辅料，负责把整杯的浓度垫起来。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "4810"
     },
@@ -474,7 +473,7 @@
         "fried"
       ],
       "note": "同款辅料加倍，浓度直接上一个档位。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "4810"
     },
@@ -500,7 +499,7 @@
       ],
       "contains": [],
       "note": "甜的、软的、热的，情绪低的时候这杯最好下口。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "4437"
     },
@@ -526,7 +525,7 @@
       ],
       "contains": [],
       "note": "解腻用的苦精，几滴就够，加多了整杯就淡了。",
-      "period": "all",
+      "period": "main",
       "price_verified": false
     },
     {
@@ -553,7 +552,7 @@
         "gluten"
       ],
       "note": "收尾的甜味剂，冰的，把整杯压下去。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "9900008754",
       "menu_name": "经典麦旋风"
@@ -583,7 +582,7 @@
         "gluten"
       ],
       "note": "最便宜的一点甜，一小口就够。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "515837"
     },
@@ -610,7 +609,7 @@
         "gluten"
       ],
       "note": "热的甜的，冬天或者难过的时候点这个。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "9900008752",
       "menu_name": "派"
@@ -638,7 +637,7 @@
         "gluten"
       ],
       "note": "甜得很直接，不绕弯子。",
-      "period": "all",
+      "period": "main",
       "price_verified": true,
       "sku": "9900008752",
       "menu_name": "派"
@@ -696,7 +695,7 @@
       "contains": [
         "caffeine"
       ],
-      "note": "同样的气，糖拿掉了，深夜的第二杯就该换这个。",
+      "note": "同样的气，糖拿掉了，第二杯就该换这个。",
       "period": "all",
       "price_verified": true,
       "sku": "9900008751",
@@ -808,7 +807,7 @@
       "contains": [
         "caffeine"
       ],
-      "note": "苦的那杯，提神用，晚上点它等于给明天加难度。",
+      "note": "苦的那杯，提神用，别在睡前四小时碰它。",
       "period": "all",
       "price_verified": true,
       "sku": "507411",
@@ -855,8 +854,8 @@
         "rich": 0.4,
         "warm": 0.95
       },
-      "kcal": 90,
-      "price": 8.0,
+      "kcal": 202,
+      "price": 9.5,
       "tags": [
         "豆浆",
         "热",
@@ -868,7 +867,9 @@
       ],
       "note": "早上最稳的调和，热的，不带刺激。",
       "period": "breakfast",
-      "price_verified": false
+      "price_verified": true,
+      "sku": "1088",
+      "menu_name": "优品豆浆"
     },
     {
       "id": "hot-chocolate",
@@ -894,7 +895,7 @@
         "dairy",
         "sugar"
       ],
-      "note": "甜的热的，专门给需要被安慰的那种晚上。",
+      "note": "甜的热的，需要被安慰的时候就来一杯。",
       "period": "all",
       "price_verified": true,
       "sku": "515946",
@@ -927,6 +928,61 @@
       "price_verified": true,
       "sku": "3505",
       "menu_name": "锡兰红茶"
+    },
+    {
+      "id": "hash-brown",
+      "name": "脆薯饼",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.1,
+        "heat": 0.0,
+        "umami": 0.45,
+        "fresh": 0.05,
+        "rich": 0.7,
+        "warm": 0.9
+      },
+      "kcal": 146,
+      "price": 8.5,
+      "tags": [
+        "薯饼",
+        "早餐",
+        "油炸"
+      ],
+      "contains": [
+        "fried"
+      ],
+      "note": "早餐唯一的小食，压得住，也不抢基酒的风头。",
+      "period": "breakfast",
+      "price_verified": true,
+      "sku": "4825"
+    },
+    {
+      "id": "youtiao",
+      "name": "脆香油条",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.3,
+        "heat": 0.0,
+        "umami": 0.3,
+        "fresh": 0.05,
+        "rich": 0.6,
+        "warm": 0.9
+      },
+      "kcal": 202,
+      "price": 8.5,
+      "tags": [
+        "油条",
+        "早餐",
+        "油炸"
+      ],
+      "contains": [
+        "fried",
+        "gluten"
+      ],
+      "note": "泡豆浆里三秒，是很多人早上唯一坚持的仪式。",
+      "period": "breakfast",
+      "price_verified": true,
+      "sku": "2631"
     }
   ],
   "price_baseline": {

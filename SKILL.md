@@ -187,7 +187,7 @@ MCP 未连接、Token 无效、工具报错时：
 | 文件 | 作用 |
 |---|---|
 | `scripts/mix.py` | 确定性配方引擎，本 skill 的核心 |
-| `data/flavor-db.json` | 餐品风味标签库（人工打标，31 个餐品） |
+| `data/flavor-db.json` | 餐品风味标签库（人工打标，33 个餐品） |
 | `data/mood-db.json` | 心情 → 风味目标向量（8 种心情，核心资产） |
 | `references/mood-wheel.md` | 心情与风味的对应关系，给人看的版本 |
 | `references/mcd-tools.md` | 麦当劳 MCP 工具速查与调用纪律 |

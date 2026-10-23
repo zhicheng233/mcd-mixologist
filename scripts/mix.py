@@ -71,6 +71,23 @@ MEAL_LABELS = {
     "late-night": "夜宵",
 }
 
+# 心情笔记是按时段无关写的，但"今晚""过夜"这种词放在早餐卡片上很出戏。
+# 早餐时按整句替换，比给 8 种心情各写一套笔记更好维护。
+BREAKFAST_TEXT = {
+    "热的、厚的、不用动脑的，就是今晚最对的配方。": "热的、厚的、不用动脑的，就是今早最对的配方。",
+    "碳水兜底，别空着肚子过夜，明天还要接着跑。": "碳水兜底，别空着肚子出门，上午还有一堆事。",
+    "别加沙拉，今晚不需要清爽，需要分量。": "别加沙拉，早上不需要清爽，需要分量。",
+    "避开油炸和咖啡因，今晚不需要再被推一把。": "避开油炸和咖啡因，上午不需要再被推一把。",
+}
+
+# 餐段自带的回避项。午餐和晚餐的菜单确实一样，但夜宵不该再推提神的。
+MEAL_AVOID = {
+    "late-night": (
+        ["caffeine"],
+        "夜宵这顿别再上咖啡因了，不然躺下就是两小时后的事。",
+    ),
+}
+
 
 # ---------------------------------------------------------------- 基础工具
 
@@ -200,8 +217,13 @@ def build_candidates(db: Dict[str, Any], meal: Optional[str]) -> Dict[str, List[
     buckets: Dict[str, List[Dict[str, Any]]] = {"base": [], "side": [], "mixer": []}
     for item in db["items"]:
         period = item.get("period", "all")
-        # 早餐品只在早餐时段出现，其他时段不供应；反过来全天品在早餐也能点。
+        # period 三态：
+        #   breakfast —— 只在早餐时段供应（麦满分、薯饼、油条、豆浆）
+        #   main      —— 10:30 之后才供应（汉堡、薯条、炸鸡、冰淇淋）
+        #   all       —— 全天供应（可乐、雪碧、咖啡等饮品）
         if period == "breakfast" and meal != "breakfast":
+            continue
+        if period == "main" and meal == "breakfast":
             continue
         role = item["role"]
         if role == "dessert":
@@ -325,6 +347,11 @@ def suggest_missing(
     for item, slot in pool:
         if item["id"] in avoid_ids:
             continue
+        # 建议是「额外加一件」，没有任何补偿理由去推一个卡片上刚说要避开的东西。
+        # 主配方里回避项是扣分项（用户非要点也行），但建议必须干净。
+        avoid_tags = mood.get("avoid") or []
+        if any(t in (item.get("contains") or []) for t in avoid_tags):
+            continue
         trial = dict(slots)
         trial[slot] = item
         scored = score_combo(trial, mood, relax)
@@ -371,6 +398,20 @@ def mix(req: Dict[str, Any], top_n: int = 3) -> Dict[str, Any]:
     mood = dict(mood)
     if text:
         mood["target"] = apply_craving(mood["target"], text)
+
+    # 餐段自带的回避项（夜宵不推咖啡因），与心情回避项合并
+    meal_rule = MEAL_AVOID.get(req.get("meal") or "")
+    if meal_rule:
+        extra, reason = meal_rule
+        merged = list(mood.get("avoid") or [])
+        added = False
+        for a in extra:
+            if a not in merged:
+                merged.append(a)
+                added = True
+        mood["avoid"] = merged
+        if added and not mood.get("avoid_reason"):
+            mood["avoid_reason"] = reason
 
     buckets = build_candidates(db, req.get("meal"))
 
@@ -421,21 +462,27 @@ def mix(req: Dict[str, Any], top_n: int = 3) -> Dict[str, Any]:
 
     recipes = []
     used_suggestions: set = set()
+    is_breakfast = req.get("meal") == "breakfast"
     for i, r in enumerate(picked):
         names = mood.get("names") or [mood["name"]]
         notes = mood.get("notes") or [""]
+        note = notes[i % len(notes)]
+        opener = (mood.get("openers") or [""])[i % len(mood.get("openers") or [""])]
+        if is_breakfast:
+            note = BREAKFAST_TEXT.get(note, note)
+            opener = BREAKFAST_TEXT.get(opener, opener)
         recipe = {
             "name": names[i % len(names)],
             "mood": mood["id"],
             "mood_name": mood["name"],
-            "opener": (mood.get("openers") or [""])[i % len(mood.get("openers") or [""])],
+            "opener": opener,
             "slots": r["slots"],
             "flavor": r["flavor"],
             "match": r["match"],
             "fit": r["fit"],
             "price": r["price"],
             "kcal": r["kcal"],
-            "note": notes[i % len(notes)],
+            "note": note,
             "warnings": r["warnings"],
             "suggestion": None,
         }

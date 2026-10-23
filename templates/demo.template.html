@@ -219,9 +219,14 @@
     }
     for (var i=0;i<req.exclude.length;i++) if (tags[req.exclude[i]]) return null;
 
+    var warnings = [];
     var avoid = req.avoid || [], hit = 0;
     for (var j=0;j<avoid.length;j++) if (tags[avoid[j]]) hit++;
-    if (hit) score -= 0.35 * hit;
+    if (hit){
+      score -= 0.35 * hit;
+      // 和 mix.py 一致：命中回避项要给出理由，否则用户不知道为什么要扣分
+      if (req.avoidReason) warnings.push(req.avoidReason);
+    }
 
     if (slots.side && slots.mixer) score += 0.07;
     else if (slots.side) score += 0.045;
@@ -232,7 +237,6 @@
     if (wantWarm >= 0.75 && flavor.warm < 0.30) score -= 0.22;
     else if (wantWarm <= 0.35 && flavor.warm > 0.80) score -= 0.10;
 
-    var warnings = [];
     if (req.cap != null && price > req.cap) return null;
     if (req.budget){
       if (price > req.budget){
@@ -250,12 +254,22 @@
   function buildBuckets(meal){
     var b = {base:[], side:[], mixer:[]};
     DB.flavor.items.forEach(function(it){
+      // period 三态，和 mix.py 的 build_candidates 保持一致
       if (it.period === "breakfast" && meal !== "breakfast") return;
+      if (it.period === "main" && meal === "breakfast") return;
       var role = it.role === "dessert" ? "side" : it.role;
       if (b[role]) b[role].push(it);
     });
     return b;
   }
+
+  // 早餐语境改写，和 mix.py 的 BREAKFAST_TEXT 保持一致
+  var BREAKFAST_TEXT = {
+    "热的、厚的、不用动脑的，就是今晚最对的配方。": "热的、厚的、不用动脑的，就是今早最对的配方。",
+    "碳水兜底，别空着肚子过夜，明天还要接着跑。": "碳水兜底，别空着肚子出门，上午还有一堆事。",
+    "别加沙拉，今晚不需要清爽，需要分量。": "别加沙拉，早上不需要清爽，需要分量。",
+    "避开油炸和咖啡因，今晚不需要再被推一把。": "避开油炸和咖啡因，上午不需要再被推一把。"
+  };
 
   function applyCraving(target){
     var out = {};
@@ -278,8 +292,23 @@
     var buckets = buildBuckets(state.meal);
     var results = [];
 
+    // 餐段自带的回避项（夜宵不推咖啡因），和 mix.py 的 MEAL_AVOID 保持一致
+    var MEAL_AVOID = {
+      "late-night": {add:["caffeine"], reason:"夜宵这顿别再上咖啡因了，不然躺下就是两小时后的事。"}
+    };
+    var avoidList = (mood.avoid || []).slice();
+    var avoidReason = mood.avoid_reason || "";
+    var mealRule = MEAL_AVOID[state.meal];
+    if (mealRule){
+      var added = false;
+      mealRule.add.forEach(function(a){
+        if (avoidList.indexOf(a) < 0){ avoidList.push(a); added = true; }
+      });
+      if (added && !avoidReason) avoidReason = mealRule.reason;
+    }
+
     function collect(cap){
-      var req = {budget: state.budget, cap: cap, exclude: [], avoid: mood.avoid || []};
+      var req = {budget: state.budget, cap: cap, exclude: [], avoid: avoidList, avoidReason: avoidReason};
       var out = [];
       buckets.base.forEach(function(base){
         var sides = [null].concat(buckets.side);
@@ -314,18 +343,25 @@
     }
 
     var usedSug = {};
+    var isBreakfast = state.meal === "breakfast";
     return picked.map(function(r, idx){
       var names = mood.names || [mood.name];
       var notes = mood.notes || [""];
       var openers = mood.openers || [""];
+      var note = notes[idx % notes.length];
+      var opener = openers[idx % openers.length];
+      if (isBreakfast){
+        note = BREAKFAST_TEXT[note] || note;
+        opener = BREAKFAST_TEXT[opener] || opener;
+      }
       var out = {
         name: names[idx % names.length],
-        opener: openers[idx % openers.length],
+        opener: opener,
         slots: r.slots, flavor: r.flavor, match: r.match, fit: r.fit,
         price: r.price, kcal: r.kcal, warnings: r.warnings,
-        note: notes[idx % notes.length], suggestion: null
+        note: note, suggestion: null
       };
-      out.suggestion = suggestMissing(out, buckets, target, usedSug, state.budget, mood.avoid || []);
+      out.suggestion = suggestMissing(out, buckets, target, usedSug, state.budget, avoidList);
       if (out.suggestion) usedSug[out.suggestion.item.id] = 1;
       return out;
     });
@@ -344,6 +380,9 @@
     pool.forEach(function(pair){
       var item = pair[0], slot = pair[1];
       if (used[item.id]) return;
+      // 和 mix.py 一致：建议必须干净，不推卡片上刚说要避开的东西
+      var contains = item.contains || [];
+      for (var a=0;a<(avoid||[]).length;a++){ if (contains.indexOf(avoid[a]) >= 0) return; }
       var trial = {}; for (var k in slots) trial[k] = slots[k];
       trial[slot] = item;
       var r = scoreCombo(trial, target, relax);
