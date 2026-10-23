@@ -13,7 +13,7 @@
 ![自测](https://img.shields.io/badge/selftest-passed-success)
 ![Demo](https://img.shields.io/badge/demo-免Token-ffc72c)
 
-**[👉 在线试算（免安装、免 Token）](https://example.github.io/mcd-mixologist/)**　·　[看配方示例](#效果示例)　·　[怎么工作](#怎么工作)
+**[👉 在线试算（免安装、免 Token）](https://zhicheng233.github.io/mcd-mixologist/)**　·　[看配方示例](#效果示例)　·　[怎么工作](#怎么工作)
 
 ![在线试算页](docs/preview.png)
 
