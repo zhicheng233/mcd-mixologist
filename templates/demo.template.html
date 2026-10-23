@@ -123,8 +123,8 @@
 
     <div class="row">
       <div>
-        <p class="label">预算　<span class="budget-val" id="budgetVal">¥30</span></p>
-        <input type="range" id="budget" min="18" max="70" step="1" value="30">
+        <p class="label">预算　<span class="budget-val" id="budgetVal">¥40</span></p>
+        <input type="range" id="budget" min="18" max="70" step="1" value="40">
       </div>
       <div>
         <p class="label">还想来点</p>
@@ -146,7 +146,7 @@
 
   <footer>
     麦当劳程序员创意开发大赛参赛作品 · 非麦当劳官方产品<br>
-    本页为离线试算，使用内置风味库与历史价格快照，<b>不查询实时菜单、不核价、不下单</b>。<br>
+    本页为离线试算，风味库与价格已于 2026-10-23 用麦当劳 MCP 真实返回校准（门店 1450713），但<b>本页不查询实时菜单、不核价、不下单</b>。<br>
     实际价格、供应状态与优惠以麦当劳官方渠道为准。本项目不含任何酒精饮品，"调酒"为风味搭配的隐喻。<br>
     <b>适配度</b>为引擎输出的相对评分，用于横向比较配方，不是概率，也不是营养或健康评分。<br>
     <a href="https://github.com/M-China/mcd-mcp-server">麦当劳 MCP 官方指南</a>
@@ -180,7 +180,7 @@
     {id:"breakfast",  name:"早餐"}
   ];
 
-  var state = { mood:null, budget:30, meal:"dinner", cravings:{} };
+  var state = { mood:null, budget:40, meal:"dinner", cravings:{} };
 
   // ---------- 与 scripts/mix.py 完全一致的打分逻辑 ----------
   function sim(a,b){

@@ -17,7 +17,8 @@
 | 接入地址 | `https://mcp.mcd.cn` |
 | 传输协议 | Streamable HTTP |
 | 鉴权方式 | 请求头 `Authorization: Bearer YOUR_MCP_TOKEN` |
-| 使用的 Tool 数量 | 10 个（详见下表） |
+| 服务端 Tool 总数 | 35 个（2026-10-23 实测 `tools/list`） |
+| 本项目使用的 Tool | 10 个（详见下表） |
 | 写操作 | 仅 1 个（`create-order`），且必须用户明确确认 |
 
 本项目**不使用**任何本地模拟的 MCP 服务，也不 fork/镜像官方服务端。
@@ -103,18 +104,37 @@ MCP 的职责是"告诉我今天有什么"，不是"帮我想"。
 
 ## 4. 数据流与字段处理
 
-麦当劳 MCP 的返回体有几个官方文档没写清楚的地方，本项目做了对应处理，
-这些处理在 `scripts/mix.py` 与 skill 的归一化步骤中：
+麦当劳 MCP 的返回体有几处官方文档没有写明，本项目在 2026-10-23 用真实
+Token 逐条踩过并做了对应处理。以下**全部是实测结论**，不是推测：
 
 | 现象 | 处理方式 |
 |---|---|
-| Tool 返回的不是纯 JSON，真数据藏在 `## Original Response` 段之后 | 先切段再 `json.loads` |
-| `list-nutrition-foods` 的 `data` 是逗号分隔的纯文本表格，不是 JSON 数组 | 按行切、按逗号 split，自行重建表头 |
-| 无数据时返回中文文案（如「暂无可用优惠券」），不是空数组 | 解析器兜底：非 JSON 一律视为空集，不当成错误 |
-| 订单金额字段是 `realTotalAmount`，且部分订单为 `"0"` | 求和时区分"全额抵扣/兑换单"与"真实支付" |
+| 返回体是「说明层 + 真实 JSON」的混合文本，真数据在 `## Original Response` 之后 | 先找锚点再 `json.loads` |
+| **部分接口没有 `## Original Response` 标记**（如 `query-store-coupons`），而说明层的 markdown 表格里含有 `{data[].title}` 这种花括号 | 不能找第一个 `{`，必须认 `{"success"` 这个锚点从后往前切 |
+| **金额单位是「分」，不是元** | `calculate-price` 返回 `price: 4850` 即 ¥48.50，展示前必须 ÷100 |
+| `query-meals` 的 `data.meals` 是**以 productCode 为键的对象**，不是数组 | 用 `meals.items()` 遍历，不能 `for m in meals` |
+| `list-nutrition-foods` 的 `data` 是**字符串**，内容是 `[160]{cols}:` 开头的类 CSV 表格 | 按行切、按逗号 split，自行重建表头 |
+| `query-nearby-stores` 在 `searchType=2` 时**必须同时传 city 和 keyword**，只传 city 会返回 `600058 城市名或者关键词不能为空` | 先带默认 keyword（如商圈名）再让用户改 |
+| **券专属商品不在 `query-meals` 列表里**：不带 couponId 核价会返回全 0 且 `productList: []` | 全 0 一律视为「不可售」，绝不能当成免费 |
+| 无数据时返回中文文案，不是空数组 | 解析器兜底：非 JSON 视为空集，不当成错误 |
 | 价格随门店、时段、活动变化 | 一律以 `calculate-price` 为准，本地价只用于离线演示 |
 
-> 以上均为实测结论，若官方后续更新返回格式，以官方为准，本项目需同步调整。
+### 实测样例（门店 1450713，2026-10-23 16:31）
+
+```
+calculate-price  巨无霸 1100 + 中薯条 4810 + 可乐 9900008751
+  → productPrice 4850 分（¥48.50），discount 0
+
+query-store-coupons  → 3 张可用券
+  · 5折甜辣组合券   适用 甜辣小食组合 9900014635
+  · 1024"码"力翻倍  适用 龙焰鸡腿堡两件套 9900016523
+
+calculate-price  龙焰鸡腿堡两件套 + 该券
+  → originalPrice 3400 / discount 1352 / price 2048 分
+  → ¥34.00 → ¥20.48，券真实生效
+```
+
+> 若官方后续更新返回格式，以官方文档为准，本项目需同步调整。
 
 ---
 
@@ -164,3 +184,60 @@ MCP 的职责是"告诉我今天有什么"，不是"帮我想"。
   `list-nutrition-foods` 复核。
 - **不含医疗或营养建议**。所有热量信息仅用于口味与分量参考。
 - **不处理支付**。`create-order` 只返回支付链接，支付在麦当劳官方渠道完成。
+
+---
+
+## 7. 联调记录（2026-10-23）
+
+用真实 MCP Token 对 `https://mcp.mcd.cn` 做过一轮完整联调，环境与结果如下。
+
+| 项 | 内容 |
+|---|---|
+| 时间 | 2026-10-23 16:30–16:35（北京时间） |
+| 协议 | Streamable HTTP + Bearer Token，`initialize` → `notifications/initialized` → `tools/list` → `tools/call` |
+| 服务端 | `mcd-mcp` v1.0.0，protocolVersion `2025-06-18` |
+| 测试门店 | 1450713 麦当劳上海黄浦华旭国际大厦餐厅 |
+| 测试城市 | 上海市（`searchType=2`，`keyword=人民广场`） |
+
+### 实际跑通的工具
+
+| Tool | 结果 |
+|---|---|
+| `now-time-info` | ✅ 返回服务器时间 `2026-10-23 16:30:43`，GMT+08:00 |
+| `campaign-calendar` | ✅ 返回 10 月全月活动，含「今日」标记；当日有 8 个在跑活动 |
+| `query-nearby-stores` | ✅ 返回门店列表（含 storeCode / beCode / 营业时间 / 可预约时段） |
+| `query-meals` | ✅ 返回 124 个在售 SKU，含 `currentPrice` / `originalPrice` / 分类 |
+| `query-store-coupons` | ✅ 返回 3 张该店可用券 |
+| `calculate-price` | ✅ 无券核价 ¥48.50；带券核价 ¥34.00 → ¥20.48，券真实生效 |
+| `list-nutrition-foods` | ✅ 返回 160 条餐品营养数据（能量/蛋白质/脂肪/碳水/钠/钙） |
+
+### 这轮联调直接改掉的东西
+
+1. **热量数据全部校准**。`data/flavor-db.json` 里 26 个餐品的热量从估算值换成
+   `list-nutrition-foods` 的官方 `energyKcal`（如巨无霸 550 → 513，圆筒 150 → 93）。
+2. **价格全部校准**。23 个餐品换成门店 1450713 的当日 `currentPrice`
+   （如板烧鸡腿堡 ¥21.5 → ¥23.5，玉米杯 ¥9 → ¥13）。
+3. **补上真实 SKU 编码**。25 个餐品补了 `sku` 字段，Agent 可以直接把
+   风味库里的餐品映射到 `calculate-price` 需要的 `productCode`。
+4. **修掉三个解析 bug**：金额单位（分/元）、`data.meals` 是对象不是数组、
+   券接口没有 `## Original Response` 标记导致被 markdown 表格里的花括号带偏。
+
+### 当日真实活动（`campaign-calendar` 返回）
+
+这些活动就是 Skill 里「装饰」位的素材来源：
+
+- 麦当劳 × PEACEMINUSONE 联名周边（棒球帽 / 徽章 / 丝巾）
+- 韩式风味蘸酱上新（韩式辣椒黄油 / 韩式烟熏芝士）
+- 麦当劳 × G-DRAGON 韩式风味系列（龙焰鸡腿堡三件套 ¥26.9 起）
+- 蓝莓爆爆珠麦旋风上新
+- 厚松饼堡早餐回归（早餐卡 6 折，3 件套 ¥15 起）
+- 麦咖啡 13.9 元浓浓黑巧
+- 学生专属 49 元 150 天麦金学期卡
+- 过家家派对 / 麦麦读派对等门店活动
+
+### 没有做的事
+
+- **没有下单**。`create-order` 会真实产生订单，本轮联调全程只读。
+- **没有领券**。`auto-bind-coupons` 会真实入账卡包，未调用。
+- **没有测外送链路**。`delivery-query-addresses` / `delivery-query-stores`
+  需要真实配送地址，本轮只测了到店自取（`orderType=1, beType=1`）。

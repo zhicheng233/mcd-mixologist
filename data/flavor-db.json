@@ -2,7 +2,7 @@
   "schema": 1,
   "updated": "2026-10-23",
   "about": "麦门调酒师的风味标签库。风味向量为项目自建（人工打标），营养成分与在售状态以麦当劳 MCP 的 list-nutrition-foods / query-meals 实时返回为准。",
-  "disclaimer": "price 与 kcal 为离线演示用的历史快照，不是官方报价。任何对外展示的价格必须经 calculate-price 实时核价。",
+  "disclaimer": "price 与 kcal 已于 2026-10-23 用麦当劳 MCP 的真实返回校准（价格取自门店 1450713 的 query-meals，热量取自 list-nutrition-foods）。价格仍会随城市/门店/时段变化，任何对外展示的价格必须经 calculate-price 实时核价；price_verified=false 的餐品为估算值。",
   "dimensions": [
     "sweet",
     "heat",
@@ -32,8 +32,8 @@
         "rich": 0.9,
         "warm": 0.85
       },
-      "kcal": 550,
-      "price": 24.0,
+      "kcal": 513,
+      "price": 25.5,
       "tags": [
         "牛肉",
         "经典",
@@ -50,7 +50,9 @@
         "巨无霸汉堡"
       ],
       "note": "吧台的老基酒，谁点都不会错，但也没人会为它惊喜。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "1100"
     },
     {
       "id": "mcspicy-chicken",
@@ -64,8 +66,8 @@
         "rich": 0.85,
         "warm": 0.85
       },
-      "kcal": 520,
-      "price": 22.0,
+      "kcal": 485,
+      "price": 22.5,
       "tags": [
         "鸡肉",
         "辣",
@@ -81,7 +83,10 @@
         "McSpicy"
       ],
       "note": "辣度直接顶到太阳穴，专治说不出口的那种烦。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "1440",
+      "menu_name": "麦辣鸡腿汉堡"
     },
     {
       "id": "grilled-chicken",
@@ -95,8 +100,8 @@
         "rich": 0.7,
         "warm": 0.85
       },
-      "kcal": 400,
-      "price": 21.5,
+      "kcal": 391,
+      "price": 23.5,
       "tags": [
         "鸡肉",
         "不辣",
@@ -111,7 +116,9 @@
         "板烧鸡腿汉堡"
       ],
       "note": "不声不响的那杯，喝的时候不觉得，回头总想再要一杯。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "1406"
     },
     {
       "id": "filet-o-fish",
@@ -125,8 +132,8 @@
         "rich": 0.65,
         "warm": 0.8
       },
-      "kcal": 330,
-      "price": 17.5,
+      "kcal": 325,
+      "price": 22.5,
       "tags": [
         "鱼",
         "不辣",
@@ -142,7 +149,9 @@
         "Filet-O-Fish"
       ],
       "note": "清淡派的退路，温柔，但撑不住太饿的夜。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "1600"
     },
     {
       "id": "double-cheese",
@@ -156,8 +165,8 @@
         "rich": 0.95,
         "warm": 0.85
       },
-      "kcal": 450,
-      "price": 19.0,
+      "kcal": 429,
+      "price": 23.0,
       "tags": [
         "牛肉",
         "不辣",
@@ -173,7 +182,9 @@
         "双层吉士"
       ],
       "note": "两片芝士压下去，胃里那个洞就暂时听不见了。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "1120"
     },
     {
       "id": "cheeseburger",
@@ -187,7 +198,7 @@
         "rich": 0.75,
         "warm": 0.85
       },
-      "kcal": 300,
+      "kcal": 294,
       "price": 13.5,
       "tags": [
         "牛肉",
@@ -201,7 +212,9 @@
         "gluten"
       ],
       "note": "小杯装，垫一下，别让胃空着过夜。",
-      "period": "all"
+      "period": "all",
+      "price_verified": false,
+      "menu_name": "吉士汉堡包"
     },
     {
       "id": "angus-beef",
@@ -215,8 +228,8 @@
         "rich": 1.0,
         "warm": 0.85
       },
-      "kcal": 690,
-      "price": 32.0,
+      "kcal": 707,
+      "price": 34.5,
       "tags": [
         "牛肉",
         "厚切",
@@ -229,7 +242,10 @@
         "gluten"
       ],
       "note": "双份基酒，度数最高的一杯，喝完基本就睡了。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "511781",
+      "menu_name": "培根安格斯厚牛堡"
     },
     {
       "id": "bacon-veggie-double",
@@ -243,8 +259,8 @@
         "rich": 0.9,
         "warm": 0.85
       },
-      "kcal": 610,
-      "price": 27.0,
+      "kcal": 442,
+      "price": 24.5,
       "tags": [
         "牛肉",
         "猪肉",
@@ -258,7 +274,9 @@
         "gluten"
       ],
       "note": "浓的底子上浮了一层菜，喝起来没那么有负担。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "1106"
     },
     {
       "id": "sausage-mcmuffin",
@@ -272,7 +290,7 @@
         "rich": 0.85,
         "warm": 0.95
       },
-      "kcal": 420,
+      "kcal": 308,
       "price": 16.0,
       "tags": [
         "猪肉",
@@ -285,7 +303,8 @@
         "gluten"
       ],
       "note": "早晨那一杯，热气一上来，人就醒了。",
-      "period": "breakfast"
+      "period": "breakfast",
+      "price_verified": false
     },
     {
       "id": "egg-mcmuffin",
@@ -299,7 +318,7 @@
         "rich": 0.7,
         "warm": 0.95
       },
-      "kcal": 350,
+      "kcal": 387,
       "price": 14.0,
       "tags": [
         "蛋",
@@ -313,7 +332,9 @@
         "gluten"
       ],
       "note": "清淡的早晨配方，不抢戏，但很稳。",
-      "period": "breakfast"
+      "period": "breakfast",
+      "price_verified": false,
+      "menu_name": "猪柳蛋麦满分"
     },
     {
       "id": "mcnuggets",
@@ -327,8 +348,8 @@
         "rich": 0.55,
         "warm": 0.8
       },
-      "kcal": 230,
-      "price": 13.5,
+      "kcal": 213,
+      "price": 14.0,
       "tags": [
         "鸡肉",
         "小食",
@@ -339,7 +360,10 @@
         "gluten"
       ],
       "note": "万能辅料，配什么都行，缺点是容易不知不觉吃完。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "1401",
+      "menu_name": "麦乐鸡"
     },
     {
       "id": "mcspicy-wings",
@@ -353,8 +377,8 @@
         "rich": 0.8,
         "warm": 0.85
       },
-      "kcal": 240,
-      "price": 13.0,
+      "kcal": 224,
+      "price": 15.0,
       "tags": [
         "鸡肉",
         "辣",
@@ -365,7 +389,10 @@
         "gluten"
       ],
       "note": "加辣不加量，情绪需要一个出口的时候加这个。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "1700",
+      "menu_name": "麦辣鸡翅"
     },
     {
       "id": "big-chicken-cutlet",
@@ -379,7 +406,7 @@
         "rich": 0.85,
         "warm": 0.85
       },
-      "kcal": 390,
+      "kcal": 385,
       "price": 14.0,
       "tags": [
         "鸡肉",
@@ -391,7 +418,10 @@
         "gluten"
       ],
       "note": "一整块压下去，分量感很足，适合当第二基酒。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "521156",
+      "menu_name": "那么大鸡排（椒盐风味）"
     },
     {
       "id": "medium-fries",
@@ -405,8 +435,8 @@
         "rich": 0.85,
         "warm": 0.8
       },
-      "kcal": 340,
-      "price": 11.5,
+      "kcal": 289,
+      "price": 13.5,
       "tags": [
         "薯条",
         "小食",
@@ -416,7 +446,9 @@
         "fried"
       ],
       "note": "最标准的辅料，负责把整杯的浓度垫起来。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "4810"
     },
     {
       "id": "large-fries",
@@ -430,8 +462,8 @@
         "rich": 0.95,
         "warm": 0.8
       },
-      "kcal": 460,
-      "price": 14.0,
+      "kcal": 379,
+      "price": 13.5,
       "tags": [
         "薯条",
         "小食",
@@ -442,7 +474,9 @@
         "fried"
       ],
       "note": "同款辅料加倍，浓度直接上一个档位。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "4810"
     },
     {
       "id": "corn-cup",
@@ -456,8 +490,8 @@
         "rich": 0.3,
         "warm": 0.75
       },
-      "kcal": 110,
-      "price": 9.0,
+      "kcal": 87,
+      "price": 13.0,
       "tags": [
         "玉米",
         "小食",
@@ -466,7 +500,9 @@
       ],
       "contains": [],
       "note": "甜的、软的、热的，情绪低的时候这杯最好下口。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "4437"
     },
     {
       "id": "garden-salad",
@@ -490,7 +526,8 @@
       ],
       "contains": [],
       "note": "解腻用的苦精，几滴就够，加多了整杯就淡了。",
-      "period": "all"
+      "period": "all",
+      "price_verified": false
     },
     {
       "id": "mcflurry-oreo",
@@ -504,8 +541,8 @@
         "rich": 0.7,
         "warm": 0.0
       },
-      "kcal": 300,
-      "price": 13.5,
+      "kcal": 266,
+      "price": 15.5,
       "tags": [
         "冰淇淋",
         "甜",
@@ -516,7 +553,10 @@
         "gluten"
       ],
       "note": "收尾的甜味剂，冰的，把整杯压下去。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "9900008754",
+      "menu_name": "经典麦旋风"
     },
     {
       "id": "cone",
@@ -530,7 +570,7 @@
         "rich": 0.45,
         "warm": 0.0
       },
-      "kcal": 150,
+      "kcal": 93,
       "price": 5.0,
       "tags": [
         "冰淇淋",
@@ -543,7 +583,9 @@
         "gluten"
       ],
       "note": "最便宜的一点甜，一小口就够。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "515837"
     },
     {
       "id": "apple-pie",
@@ -557,8 +599,8 @@
         "rich": 0.7,
         "warm": 0.8
       },
-      "kcal": 240,
-      "price": 8.0,
+      "kcal": 221,
+      "price": 8.5,
       "tags": [
         "甜点",
         "热",
@@ -568,7 +610,10 @@
         "gluten"
       ],
       "note": "热的甜的，冬天或者难过的时候点这个。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "9900008752",
+      "menu_name": "派"
     },
     {
       "id": "taro-pie",
@@ -582,8 +627,8 @@
         "rich": 0.75,
         "warm": 0.8
       },
-      "kcal": 250,
-      "price": 8.0,
+      "kcal": 232,
+      "price": 8.5,
       "tags": [
         "甜点",
         "热",
@@ -593,7 +638,10 @@
         "gluten"
       ],
       "note": "甜得很直接，不绕弯子。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "9900008752",
+      "menu_name": "派"
     },
     {
       "id": "coke",
@@ -607,8 +655,8 @@
         "rich": 0.15,
         "warm": 0.0
       },
-      "kcal": 150,
-      "price": 10.0,
+      "kcal": 147,
+      "price": 9.5,
       "tags": [
         "饮料",
         "碳酸",
@@ -620,7 +668,10 @@
         "sugar"
       ],
       "note": "经典调和，冰的，气一上来整杯就活了。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "9900008751",
+      "menu_name": "可乐"
     },
     {
       "id": "coke-zero",
@@ -635,7 +686,7 @@
         "warm": 0.0
       },
       "kcal": 0,
-      "price": 10.0,
+      "price": 9.5,
       "tags": [
         "饮料",
         "碳酸",
@@ -646,7 +697,10 @@
         "caffeine"
       ],
       "note": "同样的气，糖拿掉了，深夜的第二杯就该换这个。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "9900008751",
+      "menu_name": "无糖可口可乐"
     },
     {
       "id": "sprite",
@@ -660,8 +714,8 @@
         "rich": 0.1,
         "warm": 0.0
       },
-      "kcal": 140,
-      "price": 10.0,
+      "kcal": 105,
+      "price": 9.5,
       "tags": [
         "饮料",
         "碳酸",
@@ -672,7 +726,10 @@
         "sugar"
       ],
       "note": "柠檬气，最解辣的一杯。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "3010",
+      "menu_name": "雪碧"
     },
     {
       "id": "fanta",
@@ -699,7 +756,8 @@
         "sugar"
       ],
       "note": "甜度最高的调和，心情很低的时候才点。",
-      "period": "all"
+      "period": "all",
+      "price_verified": false
     },
     {
       "id": "orange-juice",
@@ -713,8 +771,8 @@
         "rich": 0.15,
         "warm": 0.0
       },
-      "kcal": 120,
-      "price": 12.0,
+      "kcal": 228,
+      "price": 13.0,
       "tags": [
         "饮料",
         "果汁",
@@ -722,7 +780,10 @@
       ],
       "contains": [],
       "note": "果味调和，配鱼或者沙拉的时候用。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "6352",
+      "menu_name": "阳光橙麦炫酷"
     },
     {
       "id": "americano",
@@ -736,8 +797,8 @@
         "rich": 0.35,
         "warm": 0.95
       },
-      "kcal": 10,
-      "price": 12.0,
+      "kcal": 13,
+      "price": 11.9,
       "tags": [
         "咖啡",
         "热",
@@ -748,7 +809,10 @@
         "caffeine"
       ],
       "note": "苦的那杯，提神用，晚上点它等于给明天加难度。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "507411",
+      "menu_name": "麦咖啡™美式"
     },
     {
       "id": "latte",
@@ -763,7 +827,7 @@
         "warm": 0.95
       },
       "kcal": 130,
-      "price": 16.0,
+      "price": 13.9,
       "tags": [
         "咖啡",
         "热",
@@ -774,7 +838,10 @@
         "dairy"
       ],
       "note": "奶把苦味裹住了，温柔的提神。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "507409",
+      "menu_name": "麦咖啡™奶铁"
     },
     {
       "id": "soy-milk",
@@ -800,7 +867,8 @@
         "soy"
       ],
       "note": "早上最稳的调和，热的，不带刺激。",
-      "period": "breakfast"
+      "period": "breakfast",
+      "price_verified": false
     },
     {
       "id": "hot-chocolate",
@@ -814,8 +882,8 @@
         "rich": 0.75,
         "warm": 0.95
       },
-      "kcal": 180,
-      "price": 12.0,
+      "kcal": 125,
+      "price": 13.9,
       "tags": [
         "饮料",
         "热",
@@ -827,7 +895,10 @@
         "sugar"
       ],
       "note": "甜的热的，专门给需要被安慰的那种晚上。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "515946",
+      "menu_name": "浓浓黑巧（冰/热）"
     },
     {
       "id": "hot-tea",
@@ -841,8 +912,8 @@
         "rich": 0.2,
         "warm": 0.95
       },
-      "kcal": 60,
-      "price": 10.0,
+      "kcal": 2,
+      "price": 11.5,
       "tags": [
         "茶",
         "热",
@@ -852,7 +923,22 @@
         "caffeine"
       ],
       "note": "最不打扰的一杯，饭局后半段用它收尾。",
-      "period": "all"
+      "period": "all",
+      "price_verified": true,
+      "sku": "3505",
+      "menu_name": "锡兰红茶"
     }
-  ]
+  ],
+  "price_baseline": {
+    "source": "麦当劳 MCP query-meals",
+    "store_code": "1450713",
+    "store_name": "麦当劳上海黄浦华旭国际大厦餐厅",
+    "captured_at": "2026-10-23 16:31",
+    "note": "价格为该门店当日 currentPrice，单位元。不同城市/门店/时段会有差异，展示前必须用 calculate-price 复核。price_verified=false 的餐品为估算值。"
+  },
+  "nutrition_baseline": {
+    "source": "麦当劳 MCP list-nutrition-foods",
+    "captured_at": "2026-10-23 16:30",
+    "note": "energyKcal 为官方营养成分表数值，全国一致。"
+  }
 }
