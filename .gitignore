@@ -1,0 +1,27 @@
+# 凭证 —— 绝不能提交
+.env
+.env.*
+*.token
+mcp-config.json
+token.txt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 本地临时
+*.log
+_dbg.py
+
+# 本地调研数据，不随项目发布
+ranking-history-*.json

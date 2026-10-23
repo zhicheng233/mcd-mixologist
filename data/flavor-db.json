@@ -1,0 +1,858 @@
+{
+  "schema": 1,
+  "updated": "2026-10-23",
+  "about": "麦门调酒师的风味标签库。风味向量为项目自建（人工打标），营养成分与在售状态以麦当劳 MCP 的 list-nutrition-foods / query-meals 实时返回为准。",
+  "disclaimer": "price 与 kcal 为离线演示用的历史快照，不是官方报价。任何对外展示的价格必须经 calculate-price 实时核价。",
+  "dimensions": [
+    "sweet",
+    "heat",
+    "umami",
+    "fresh",
+    "rich",
+    "warm"
+  ],
+  "dimension_labels": {
+    "sweet": "甜",
+    "heat": "辣",
+    "umami": "咸鲜",
+    "fresh": "清爽",
+    "rich": "浓郁",
+    "warm": "温热"
+  },
+  "items": [
+    {
+      "id": "big-mac",
+      "name": "巨无霸",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.35,
+        "heat": 0.05,
+        "umami": 0.85,
+        "fresh": 0.25,
+        "rich": 0.9,
+        "warm": 0.85
+      },
+      "kcal": 550,
+      "price": 24.0,
+      "tags": [
+        "牛肉",
+        "经典",
+        "汉堡"
+      ],
+      "contains": [
+        "beef",
+        "dairy",
+        "gluten",
+        "egg"
+      ],
+      "aliases": [
+        "Big Mac",
+        "巨无霸汉堡"
+      ],
+      "note": "吧台的老基酒，谁点都不会错，但也没人会为它惊喜。",
+      "period": "all"
+    },
+    {
+      "id": "mcspicy-chicken",
+      "name": "麦辣鸡腿堡",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.15,
+        "heat": 0.85,
+        "umami": 0.8,
+        "fresh": 0.2,
+        "rich": 0.85,
+        "warm": 0.85
+      },
+      "kcal": 520,
+      "price": 22.0,
+      "tags": [
+        "鸡肉",
+        "辣",
+        "汉堡"
+      ],
+      "contains": [
+        "chicken",
+        "gluten",
+        "egg"
+      ],
+      "aliases": [
+        "麦辣鸡腿汉堡",
+        "McSpicy"
+      ],
+      "note": "辣度直接顶到太阳穴，专治说不出口的那种烦。",
+      "period": "all"
+    },
+    {
+      "id": "grilled-chicken",
+      "name": "板烧鸡腿堡",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.25,
+        "heat": 0.1,
+        "umami": 0.75,
+        "fresh": 0.35,
+        "rich": 0.7,
+        "warm": 0.85
+      },
+      "kcal": 400,
+      "price": 21.5,
+      "tags": [
+        "鸡肉",
+        "不辣",
+        "汉堡",
+        "相对轻"
+      ],
+      "contains": [
+        "chicken",
+        "gluten"
+      ],
+      "aliases": [
+        "板烧鸡腿汉堡"
+      ],
+      "note": "不声不响的那杯，喝的时候不觉得，回头总想再要一杯。",
+      "period": "all"
+    },
+    {
+      "id": "filet-o-fish",
+      "name": "麦香鱼",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.2,
+        "heat": 0.0,
+        "umami": 0.6,
+        "fresh": 0.4,
+        "rich": 0.65,
+        "warm": 0.8
+      },
+      "kcal": 330,
+      "price": 17.5,
+      "tags": [
+        "鱼",
+        "不辣",
+        "汉堡",
+        "相对轻"
+      ],
+      "contains": [
+        "fish",
+        "dairy",
+        "gluten"
+      ],
+      "aliases": [
+        "Filet-O-Fish"
+      ],
+      "note": "清淡派的退路，温柔，但撑不住太饿的夜。",
+      "period": "all"
+    },
+    {
+      "id": "double-cheese",
+      "name": "双层吉士汉堡",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.2,
+        "heat": 0.0,
+        "umami": 0.85,
+        "fresh": 0.15,
+        "rich": 0.95,
+        "warm": 0.85
+      },
+      "kcal": 450,
+      "price": 19.0,
+      "tags": [
+        "牛肉",
+        "不辣",
+        "汉堡",
+        "芝士"
+      ],
+      "contains": [
+        "beef",
+        "dairy",
+        "gluten"
+      ],
+      "aliases": [
+        "双层吉士"
+      ],
+      "note": "两片芝士压下去，胃里那个洞就暂时听不见了。",
+      "period": "all"
+    },
+    {
+      "id": "cheeseburger",
+      "name": "吉士汉堡",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.2,
+        "heat": 0.0,
+        "umami": 0.75,
+        "fresh": 0.25,
+        "rich": 0.75,
+        "warm": 0.85
+      },
+      "kcal": 300,
+      "price": 13.5,
+      "tags": [
+        "牛肉",
+        "不辣",
+        "汉堡",
+        "小份"
+      ],
+      "contains": [
+        "beef",
+        "dairy",
+        "gluten"
+      ],
+      "note": "小杯装，垫一下，别让胃空着过夜。",
+      "period": "all"
+    },
+    {
+      "id": "angus-beef",
+      "name": "安格斯厚牛堡",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.2,
+        "heat": 0.05,
+        "umami": 0.95,
+        "fresh": 0.15,
+        "rich": 1.0,
+        "warm": 0.85
+      },
+      "kcal": 690,
+      "price": 32.0,
+      "tags": [
+        "牛肉",
+        "厚切",
+        "汉堡",
+        "重"
+      ],
+      "contains": [
+        "beef",
+        "dairy",
+        "gluten"
+      ],
+      "note": "双份基酒，度数最高的一杯，喝完基本就睡了。",
+      "period": "all"
+    },
+    {
+      "id": "bacon-veggie-double",
+      "name": "培根蔬萃双层牛堡",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.25,
+        "heat": 0.05,
+        "umami": 0.9,
+        "fresh": 0.35,
+        "rich": 0.9,
+        "warm": 0.85
+      },
+      "kcal": 610,
+      "price": 27.0,
+      "tags": [
+        "牛肉",
+        "猪肉",
+        "蔬菜",
+        "汉堡"
+      ],
+      "contains": [
+        "beef",
+        "pork",
+        "dairy",
+        "gluten"
+      ],
+      "note": "浓的底子上浮了一层菜，喝起来没那么有负担。",
+      "period": "all"
+    },
+    {
+      "id": "sausage-mcmuffin",
+      "name": "猪柳麦满分",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.3,
+        "heat": 0.05,
+        "umami": 0.8,
+        "fresh": 0.25,
+        "rich": 0.85,
+        "warm": 0.95
+      },
+      "kcal": 420,
+      "price": 16.0,
+      "tags": [
+        "猪肉",
+        "早餐",
+        "汉堡"
+      ],
+      "contains": [
+        "pork",
+        "dairy",
+        "gluten"
+      ],
+      "note": "早晨那一杯，热气一上来，人就醒了。",
+      "period": "breakfast"
+    },
+    {
+      "id": "egg-mcmuffin",
+      "name": "吉士蛋麦满分",
+      "role": "base",
+      "flavor": {
+        "sweet": 0.25,
+        "heat": 0.0,
+        "umami": 0.7,
+        "fresh": 0.35,
+        "rich": 0.7,
+        "warm": 0.95
+      },
+      "kcal": 350,
+      "price": 14.0,
+      "tags": [
+        "蛋",
+        "早餐",
+        "汉堡",
+        "相对轻"
+      ],
+      "contains": [
+        "egg",
+        "dairy",
+        "gluten"
+      ],
+      "note": "清淡的早晨配方，不抢戏，但很稳。",
+      "period": "breakfast"
+    },
+    {
+      "id": "mcnuggets",
+      "name": "麦乐鸡（5块）",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.1,
+        "heat": 0.05,
+        "umami": 0.6,
+        "fresh": 0.3,
+        "rich": 0.55,
+        "warm": 0.8
+      },
+      "kcal": 230,
+      "price": 13.5,
+      "tags": [
+        "鸡肉",
+        "小食",
+        "可蘸酱"
+      ],
+      "contains": [
+        "chicken",
+        "gluten"
+      ],
+      "note": "万能辅料，配什么都行，缺点是容易不知不觉吃完。",
+      "period": "all"
+    },
+    {
+      "id": "mcspicy-wings",
+      "name": "麦辣鸡翅（2块）",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.1,
+        "heat": 0.9,
+        "umami": 0.75,
+        "fresh": 0.15,
+        "rich": 0.8,
+        "warm": 0.85
+      },
+      "kcal": 240,
+      "price": 13.0,
+      "tags": [
+        "鸡肉",
+        "辣",
+        "小食"
+      ],
+      "contains": [
+        "chicken",
+        "gluten"
+      ],
+      "note": "加辣不加量，情绪需要一个出口的时候加这个。",
+      "period": "all"
+    },
+    {
+      "id": "big-chicken-cutlet",
+      "name": "那么大鸡排",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.15,
+        "heat": 0.25,
+        "umami": 0.7,
+        "fresh": 0.2,
+        "rich": 0.85,
+        "warm": 0.85
+      },
+      "kcal": 390,
+      "price": 14.0,
+      "tags": [
+        "鸡肉",
+        "小食",
+        "大份"
+      ],
+      "contains": [
+        "chicken",
+        "gluten"
+      ],
+      "note": "一整块压下去，分量感很足，适合当第二基酒。",
+      "period": "all"
+    },
+    {
+      "id": "medium-fries",
+      "name": "中薯条",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.1,
+        "heat": 0.0,
+        "umami": 0.55,
+        "fresh": 0.1,
+        "rich": 0.85,
+        "warm": 0.8
+      },
+      "kcal": 340,
+      "price": 11.5,
+      "tags": [
+        "薯条",
+        "小食",
+        "油炸"
+      ],
+      "contains": [
+        "fried"
+      ],
+      "note": "最标准的辅料，负责把整杯的浓度垫起来。",
+      "period": "all"
+    },
+    {
+      "id": "large-fries",
+      "name": "大薯条",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.1,
+        "heat": 0.0,
+        "umami": 0.55,
+        "fresh": 0.08,
+        "rich": 0.95,
+        "warm": 0.8
+      },
+      "kcal": 460,
+      "price": 14.0,
+      "tags": [
+        "薯条",
+        "小食",
+        "油炸",
+        "大份"
+      ],
+      "contains": [
+        "fried"
+      ],
+      "note": "同款辅料加倍，浓度直接上一个档位。",
+      "period": "all"
+    },
+    {
+      "id": "corn-cup",
+      "name": "玉米杯",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.65,
+        "heat": 0.0,
+        "umami": 0.2,
+        "fresh": 0.5,
+        "rich": 0.3,
+        "warm": 0.75
+      },
+      "kcal": 110,
+      "price": 9.0,
+      "tags": [
+        "玉米",
+        "小食",
+        "相对轻",
+        "不辣"
+      ],
+      "contains": [],
+      "note": "甜的、软的、热的，情绪低的时候这杯最好下口。",
+      "period": "all"
+    },
+    {
+      "id": "garden-salad",
+      "name": "蔬菜沙拉",
+      "role": "side",
+      "flavor": {
+        "sweet": 0.3,
+        "heat": 0.0,
+        "umami": 0.15,
+        "fresh": 0.95,
+        "rich": 0.1,
+        "warm": 0.2
+      },
+      "kcal": 90,
+      "price": 12.0,
+      "tags": [
+        "蔬菜",
+        "沙拉",
+        "清淡",
+        "不辣"
+      ],
+      "contains": [],
+      "note": "解腻用的苦精，几滴就够，加多了整杯就淡了。",
+      "period": "all"
+    },
+    {
+      "id": "mcflurry-oreo",
+      "name": "奥利奥麦旋风",
+      "role": "dessert",
+      "flavor": {
+        "sweet": 0.95,
+        "heat": 0.0,
+        "umami": 0.1,
+        "fresh": 0.45,
+        "rich": 0.7,
+        "warm": 0.0
+      },
+      "kcal": 300,
+      "price": 13.5,
+      "tags": [
+        "冰淇淋",
+        "甜",
+        "冷"
+      ],
+      "contains": [
+        "dairy",
+        "gluten"
+      ],
+      "note": "收尾的甜味剂，冰的，把整杯压下去。",
+      "period": "all"
+    },
+    {
+      "id": "cone",
+      "name": "圆筒冰淇淋",
+      "role": "dessert",
+      "flavor": {
+        "sweet": 0.85,
+        "heat": 0.0,
+        "umami": 0.1,
+        "fresh": 0.55,
+        "rich": 0.45,
+        "warm": 0.0
+      },
+      "kcal": 150,
+      "price": 5.0,
+      "tags": [
+        "冰淇淋",
+        "甜",
+        "冷",
+        "小份"
+      ],
+      "contains": [
+        "dairy",
+        "gluten"
+      ],
+      "note": "最便宜的一点甜，一小口就够。",
+      "period": "all"
+    },
+    {
+      "id": "apple-pie",
+      "name": "苹果派",
+      "role": "dessert",
+      "flavor": {
+        "sweet": 0.8,
+        "heat": 0.05,
+        "umami": 0.15,
+        "fresh": 0.15,
+        "rich": 0.7,
+        "warm": 0.8
+      },
+      "kcal": 240,
+      "price": 8.0,
+      "tags": [
+        "甜点",
+        "热",
+        "派"
+      ],
+      "contains": [
+        "gluten"
+      ],
+      "note": "热的甜的，冬天或者难过的时候点这个。",
+      "period": "all"
+    },
+    {
+      "id": "taro-pie",
+      "name": "香芋派",
+      "role": "dessert",
+      "flavor": {
+        "sweet": 0.85,
+        "heat": 0.0,
+        "umami": 0.1,
+        "fresh": 0.1,
+        "rich": 0.75,
+        "warm": 0.8
+      },
+      "kcal": 250,
+      "price": 8.0,
+      "tags": [
+        "甜点",
+        "热",
+        "派"
+      ],
+      "contains": [
+        "gluten"
+      ],
+      "note": "甜得很直接，不绕弯子。",
+      "period": "all"
+    },
+    {
+      "id": "coke",
+      "name": "可口可乐（中）",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.85,
+        "heat": 0.0,
+        "umami": 0.05,
+        "fresh": 0.75,
+        "rich": 0.15,
+        "warm": 0.0
+      },
+      "kcal": 150,
+      "price": 10.0,
+      "tags": [
+        "饮料",
+        "碳酸",
+        "冰",
+        "含糖"
+      ],
+      "contains": [
+        "caffeine",
+        "sugar"
+      ],
+      "note": "经典调和，冰的，气一上来整杯就活了。",
+      "period": "all"
+    },
+    {
+      "id": "coke-zero",
+      "name": "零度可乐（中）",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.55,
+        "heat": 0.0,
+        "umami": 0.05,
+        "fresh": 0.85,
+        "rich": 0.05,
+        "warm": 0.0
+      },
+      "kcal": 0,
+      "price": 10.0,
+      "tags": [
+        "饮料",
+        "碳酸",
+        "冰",
+        "无糖"
+      ],
+      "contains": [
+        "caffeine"
+      ],
+      "note": "同样的气，糖拿掉了，深夜的第二杯就该换这个。",
+      "period": "all"
+    },
+    {
+      "id": "sprite",
+      "name": "雪碧（中）",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.8,
+        "heat": 0.0,
+        "umami": 0.05,
+        "fresh": 0.8,
+        "rich": 0.1,
+        "warm": 0.0
+      },
+      "kcal": 140,
+      "price": 10.0,
+      "tags": [
+        "饮料",
+        "碳酸",
+        "冰",
+        "含糖"
+      ],
+      "contains": [
+        "sugar"
+      ],
+      "note": "柠檬气，最解辣的一杯。",
+      "period": "all"
+    },
+    {
+      "id": "fanta",
+      "name": "芬达（中）",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.9,
+        "heat": 0.0,
+        "umami": 0.05,
+        "fresh": 0.7,
+        "rich": 0.15,
+        "warm": 0.0
+      },
+      "kcal": 160,
+      "price": 10.0,
+      "tags": [
+        "饮料",
+        "碳酸",
+        "冰",
+        "含糖",
+        "甜"
+      ],
+      "contains": [
+        "sugar"
+      ],
+      "note": "甜度最高的调和，心情很低的时候才点。",
+      "period": "all"
+    },
+    {
+      "id": "orange-juice",
+      "name": "橙汁",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.75,
+        "heat": 0.0,
+        "umami": 0.1,
+        "fresh": 0.85,
+        "rich": 0.15,
+        "warm": 0.0
+      },
+      "kcal": 120,
+      "price": 12.0,
+      "tags": [
+        "饮料",
+        "果汁",
+        "冰"
+      ],
+      "contains": [],
+      "note": "果味调和，配鱼或者沙拉的时候用。",
+      "period": "all"
+    },
+    {
+      "id": "americano",
+      "name": "美式咖啡",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.1,
+        "heat": 0.0,
+        "umami": 0.3,
+        "fresh": 0.55,
+        "rich": 0.35,
+        "warm": 0.95
+      },
+      "kcal": 10,
+      "price": 12.0,
+      "tags": [
+        "咖啡",
+        "热",
+        "无糖",
+        "提神"
+      ],
+      "contains": [
+        "caffeine"
+      ],
+      "note": "苦的那杯，提神用，晚上点它等于给明天加难度。",
+      "period": "all"
+    },
+    {
+      "id": "latte",
+      "name": "拿铁",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.35,
+        "heat": 0.0,
+        "umami": 0.3,
+        "fresh": 0.45,
+        "rich": 0.6,
+        "warm": 0.95
+      },
+      "kcal": 130,
+      "price": 16.0,
+      "tags": [
+        "咖啡",
+        "热",
+        "奶"
+      ],
+      "contains": [
+        "caffeine",
+        "dairy"
+      ],
+      "note": "奶把苦味裹住了，温柔的提神。",
+      "period": "all"
+    },
+    {
+      "id": "soy-milk",
+      "name": "豆浆",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.35,
+        "heat": 0.0,
+        "umami": 0.25,
+        "fresh": 0.5,
+        "rich": 0.4,
+        "warm": 0.95
+      },
+      "kcal": 90,
+      "price": 8.0,
+      "tags": [
+        "豆浆",
+        "热",
+        "早餐",
+        "不含咖啡因"
+      ],
+      "contains": [
+        "soy"
+      ],
+      "note": "早上最稳的调和，热的，不带刺激。",
+      "period": "breakfast"
+    },
+    {
+      "id": "hot-chocolate",
+      "name": "热巧克力",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.9,
+        "heat": 0.0,
+        "umami": 0.15,
+        "fresh": 0.25,
+        "rich": 0.75,
+        "warm": 0.95
+      },
+      "kcal": 180,
+      "price": 12.0,
+      "tags": [
+        "饮料",
+        "热",
+        "甜",
+        "奶"
+      ],
+      "contains": [
+        "dairy",
+        "sugar"
+      ],
+      "note": "甜的热的，专门给需要被安慰的那种晚上。",
+      "period": "all"
+    },
+    {
+      "id": "hot-tea",
+      "name": "红茶",
+      "role": "mixer",
+      "flavor": {
+        "sweet": 0.3,
+        "heat": 0.0,
+        "umami": 0.2,
+        "fresh": 0.65,
+        "rich": 0.2,
+        "warm": 0.95
+      },
+      "kcal": 60,
+      "price": 10.0,
+      "tags": [
+        "茶",
+        "热",
+        "温和"
+      ],
+      "contains": [
+        "caffeine"
+      ],
+      "note": "最不打扰的一杯，饭局后半段用它收尾。",
+      "period": "all"
+    }
+  ]
+}

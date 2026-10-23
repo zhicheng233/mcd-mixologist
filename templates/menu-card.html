@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>今日特调卡片 · 模板</title>
+<!--
+  特调卡片模板（750 × 1000，适合截图分享）
+
+  用法：把下面所有 {{占位符}} 替换成引擎输出里的真实内容，另存为一份新的 html，
+  在浏览器里打开截图即可。或者由 Agent 直接填充后交给用户。
+
+  规则：
+    1. 只填真实数据，价格必须来自 calculate-price 或明确标注"演示价"
+    2. 不要写入用户地址、手机号、订单号
+    3. 「装饰」位没有真实券就留空，不要编一张
+-->
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    width:750px;height:1000px;overflow:hidden;
+    background:radial-gradient(700px 400px at 50% -8%,#2e2118 0%,#0f0c0a 60%);
+    color:#f4ece2;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    padding:56px 52px;display:flex;flex-direction:column;
+    -webkit-font-smoothing:antialiased;
+  }
+  .kicker{font-size:13px;letter-spacing:.32em;color:#a89a8b}
+  .mood{font-size:15px;color:#ffc72c;letter-spacing:.1em;margin-top:14px}
+  .name{font-size:56px;font-weight:800;letter-spacing:.02em;margin-top:6px;line-height:1.15}
+  .opener{font-size:17px;color:#a89a8b;margin-top:16px;line-height:1.6;font-style:italic}
+  .rule{height:1px;background:linear-gradient(90deg,#ffc72c,#33291f 70%);margin:30px 0 8px}
+  .slot{display:flex;gap:18px;padding:17px 0;border-bottom:1px dashed #2b231b}
+  .role{flex:0 0 56px;color:#ffc72c;font-size:13px;letter-spacing:.16em;padding-top:5px}
+  .item{flex:1}
+  .iname{font-size:23px;font-weight:700}
+  .inote{font-size:14px;color:#a89a8b;margin-top:5px;line-height:1.55}
+  .flavors{display:flex;gap:26px;margin-top:26px;font-size:13px;color:#a89a8b}
+  .flavors b{color:#f4ece2;letter-spacing:3px;font-weight:400;font-size:15px;margin-left:6px}
+  .meta{display:flex;gap:26px;margin-top:16px;align-items:baseline}
+  .price{font-size:34px;font-weight:800;color:#ffc72c}
+  .kcal{font-size:15px;color:#a89a8b}
+  .note{
+    margin-top:auto;border-left:3px solid #ffc72c;padding:16px 20px;
+    background:#15110e;border-radius:0 10px 10px 0;font-size:16px;line-height:1.65;
+  }
+  .note b{color:#ffc72c}
+  .foot{margin-top:22px;font-size:11px;color:#5f5449;line-height:1.7}
+</style>
+</head>
+<body>
+  <div class="kicker">今日特调 · TODAY'S MIX</div>
+  <div class="mood">{{心情}}　{{餐段}}</div>
+  <div class="name">{{配方名}}</div>
+  <div class="opener">{{开场白}}</div>
+
+  <div class="rule"></div>
+
+  <div class="slot">
+    <div class="role">基酒</div>
+    <div class="item">
+      <div class="iname">{{基酒名}}</div>
+      <div class="inote">{{基酒描述}}</div>
+    </div>
+  </div>
+  <div class="slot">
+    <div class="role">辅料</div>
+    <div class="item">
+      <div class="iname">{{辅料名}}</div>
+      <div class="inote">{{辅料描述}}</div>
+    </div>
+  </div>
+  <div class="slot">
+    <div class="role">调和</div>
+    <div class="item">
+      <div class="iname">{{调和名}}</div>
+      <div class="inote">{{调和描述}}</div>
+    </div>
+  </div>
+  <div class="slot">
+    <div class="role">装饰</div>
+    <div class="item">
+      <div class="iname">{{券或活动}}</div>
+      <div class="inote">{{优惠说明}}</div>
+    </div>
+  </div>
+
+  <div class="flavors">
+    <span>辣<b>{{辣}}</b></span>
+    <span>浓郁<b>{{浓郁}}</b></span>
+    <span>清爽<b>{{清爽}}</b></span>
+    <span>温热<b>{{温热}}</b></span>
+  </div>
+
+  <div class="meta">
+    <div class="price">¥{{价格}}</div>
+    <div class="kcal">{{热量}} kcal　·　适配度 {{适配度}}%</div>
+  </div>
+
+  <div class="note"><b>调酒师笔记：</b>{{一句话}}</div>
+
+  <div class="foot">
+    麦当劳程序员创意开发大赛参赛作品 · 非麦当劳官方产品<br>
+    价格为核价快照，实际以门店与官方渠道为准。本项目不含酒精饮品。
+  </div>
+</body>
+</html>

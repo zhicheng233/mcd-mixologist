@@ -1,0 +1,10 @@
+# 统一换行，避免 Windows 上 checkout 出 CRLF
+* text=auto eol=lf
+
+# 参赛声明必须与官方文件逐字节一致，禁止任何换行转换
+CONTEST_DECLARATION.md -text
+
+# 图片与二进制
+*.png binary
+*.jpg binary
+*.ico binary

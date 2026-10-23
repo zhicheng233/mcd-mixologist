@@ -1,0 +1,12 @@
+{
+  "_comment": "麦门调酒师 · MCP 配置示例。把 YOUR_MCP_TOKEN 换成你自己的麦当劳 MCP Token。本文件不含任何真实凭证，请勿把填好的版本提交到仓库。",
+  "mcpServers": {
+    "mcd-mcp": {
+      "type": "streamablehttp",
+      "url": "https://mcp.mcd.cn",
+      "headers": {
+        "Authorization": "Bearer YOUR_MCP_TOKEN"
+      }
+    }
+  }
+}
